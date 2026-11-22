@@ -1,0 +1,24 @@
+{
+  "name": "naija-hub-desktop",
+  "version": "1.0.0",
+  "description": "Naija Hub desktop app — offline-first Nigerian utilities",
+  "main": "main.js",
+  "author": "Naija Hub",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "app.naijahub.desktop",
+    "productName": "Naija Hub",
+    "files": ["main.js", "offline.html", "build/icon.png"],
+    "win": { "target": ["nsis", "portable"], "icon": "build/icon.png" },
+    "mac": { "target": ["dmg"], "category": "public.app-category.utilities", "icon": "build/icon.png" },
+    "linux": { "target": ["AppImage", "deb"], "category": "Utility", "icon": "build/icon.png" }
+  }
+}

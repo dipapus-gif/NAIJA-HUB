@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+    background-color: #061a14;
+    color: #faf8f4;
+  }
+}
+
+.font-display {
+  font-family: var(--font-space), system-ui, -apple-system, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+.mc-serif { font-family: var(--font-serif), Georgia, serif; }
+
+/* Motion chapters — dark (default) */
+.mc-section { background: radial-gradient(ellipse at 80% 20%, #0d4a36 0%, transparent 55%), linear-gradient(180deg, #061a14, #04120e); }
+.mc-heading { color: #faf8f4; }
+.mc-body { color: rgb(209 250 229 / 0.8); }
+.mc-cta { border-color: rgb(252 211 77 / 0.7); color: #fcd34d; }
+.mc-chip { border-color: rgb(167 243 208 / 0.3); color: #d1fae5; background: rgb(6 26 20 / 0.5); }
+
+/* ---------- Light theme: motion chapters ---------- */
+html[data-theme="light"] .mc-section { background: radial-gradient(ellipse at 80% 20%, #fde68a55 0%, transparent 55%), linear-gradient(180deg, #f6f3ea, #efe9da); }
+html[data-theme="light"] .mc-heading { color: #052e22; }
+html[data-theme="light"] .mc-body { color: #44403c; }
+html[data-theme="light"] .mc-cta { border-color: #065f46; color: #065f46; }
+html[data-theme="light"] .mc-chip { border-color: rgb(6 95 70 / 0.35); color: #065f46; background: rgb(255 255 255 / 0.7); }
+html[data-theme="light"] .mc-section .mc-serif.text-amber-300\/80 { color: #b45309; }
+html[data-theme="light"] body { background-color: #f6f3ea; color: #1c1917; }
+
+/* ---------- Dark theme: darken the light surfaces ---------- */
+html:not([data-theme="light"]) body { background-color: #061a14; }
+html:not([data-theme="light"]) .bg-white,
+html:not([data-theme="light"]) .bg-stone-50 { background-color: #0b2219 !important; }
+html:not([data-theme="light"]) .bg-stone-100 { background-color: #0f2c20 !important; }
+html:not([data-theme="light"]) .bg-stone-200 { background-color: #143727 !important; }
+html:not([data-theme="light"]) .bg-emerald-100 { background-color: #064e3b !important; }
+html:not([data-theme="light"]) .bg-rose-50 { background-color: #3b1620 !important; }
+html:not([data-theme="light"]) .border-stone-100,
+html:not([data-theme="light"]) .border-stone-200,
+html:not([data-theme="light"]) .border-stone-300 { border-color: #1d4a37 !important; }
+html:not([data-theme="light"]) .text-stone-950:not([class*="bg-amber"]):not([class*="bg-emerald-"]),
+html:not([data-theme="light"]) .text-stone-900:not([class*="bg-amber"]),
+html:not([data-theme="light"]) .text-stone-800 { color: #f5f5f4 !important; }
+html:not([data-theme="light"]) .text-stone-700,
+html:not([data-theme="light"]) .text-stone-600 { color: #d6d3d1 !important; }
+html:not([data-theme="light"]) .text-stone-500 { color: #a8a29e !important; }
+html:not([data-theme="light"]) .text-emerald-800,
+html:not([data-theme="light"]) .text-emerald-700 { color: #6ee7b7 !important; }
+html:not([data-theme="light"]) .text-rose-700 { color: #fda4af !important; }
+html:not([data-theme="light"]) input,
+html:not([data-theme="light"]) select,
+html:not([data-theme="light"]) textarea { color-scheme: dark; }
+html:not([data-theme="light"]) .hover\:bg-emerald-50:hover { background-color: #0f2c20 !important; }
+/* header "Install" pill stays readable */
+html:not([data-theme="light"]) header .bg-white { background-color: #fff !important; color: #1c1917 !important; }
+html:not([data-theme="light"]) .bg-\[\#FAF8F4\] { background-color: #08201a !important; }
+html:not([data-theme="light"]) .bg-emerald-50,
+html:not([data-theme="light"]) .bg-emerald-50\/80 { background-color: #0a3a2a !important; }
+html:not([data-theme="light"]) .bg-amber-50,
+html:not([data-theme="light"]) .bg-amber-100 { background-color: #3a2a08 !important; }
+html:not([data-theme="light"]) .bg-rose-100,
+html:not([data-theme="light"]) .bg-rose-50\/70,
+html:not([data-theme="light"]) .bg-rose-50\/80 { background-color: #3b1620 !important; }
+html:not([data-theme="light"]) .bg-sky-100 { background-color: #0c2d48 !important; }
+html:not([data-theme="light"]) .text-emerald-900,
+html:not([data-theme="light"]) .text-emerald-950 { color: #a7f3d0 !important; }
+html:not([data-theme="light"]) .text-amber-800,
+html:not([data-theme="light"]) .text-amber-950 { color: #fcd34d !important; }
+html:not([data-theme="light"]) .border-emerald-200,
+html:not([data-theme="light"]) .border-emerald-100,
+html:not([data-theme="light"]) .border-rose-200,
+html:not([data-theme="light"]) .border-amber-200 { border-color: #1d4a37 !important; }
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Light theme: page canvas (hero/stage and top bars stay dark brand surfaces) ---------- */
+html[data-theme="light"] .min-h-screen.bg-\[\#061A14\] { background-color: #f6f3ea; color: #1c1917; }
+html[data-theme="light"] .site-foot { border-color: #d6d3d1; color: #57534e; }
+html[data-theme="light"] .site-foot a:hover { color: #065f46; }
