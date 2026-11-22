@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState, type VideoHTMLAttributes } from "react";
+import { videoSources } from "@/lib/videoSources";
 
 /**
- * Drop-in <video> that only downloads and plays while it is near the viewport.
- * Several 4K background videos playing at once is what made the page lag.
+ * Drop-in <video>: same clip, but it only downloads/plays while on screen and
+ * prefers lighter renditions, so scrolling stays smooth.
  */
 export function LazyVideo({ src, autoPlay, ...rest }: VideoHTMLAttributes<HTMLVideoElement>) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -18,8 +19,8 @@ export function LazyVideo({ src, autoPlay, ...rest }: VideoHTMLAttributes<HTMLVi
       setVisible(true);
       return;
     }
-    const nearIo = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px" });
-    const visIo = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.15 });
+    const nearIo = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "600px" });
+    const visIo = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.1 });
     nearIo.observe(el);
     visIo.observe(el);
     return () => {
@@ -29,12 +30,19 @@ export function LazyVideo({ src, autoPlay, ...rest }: VideoHTMLAttributes<HTMLVi
   }, []);
 
   useEffect(() => {
+    if (near) ref.current?.load();
+  }, [near]);
+
+  useEffect(() => {
     const v = ref.current;
     if (!v || !near) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (visible && autoPlay && !reduce && !document.hidden) v.play().catch(() => {});
+    if (visible && autoPlay) v.play().catch(() => {});
     else v.pause();
   }, [near, visible, autoPlay]);
 
-  return <video ref={ref} src={near ? src : undefined} preload="none" playsInline loop {...rest} />;
+  return (
+    <video ref={ref} preload="none" playsInline loop disablePictureInPicture {...rest}>
+      {near && typeof src === "string" && videoSources(src, { small: true }).map((s) => <source key={s} src={s} type="video/mp4" />)}
+    </video>
+  );
 }

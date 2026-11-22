@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Pause, Play } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import { videoSources } from "@/lib/videoSources";
 
 interface Chapter {
   video: string;
@@ -75,7 +76,7 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
   useEffect(() => {
     videos.current.forEach((v, i) => {
       if (!v) return;
-      if (playing && i === active) v.play().catch(() => {});
+      if (playing && Math.abs(i - Math.min(active, CHAPTERS.length - 1)) <= 1) v.play().catch(() => {});
       else v.pause();
     });
   }, [active, playing]);
@@ -95,36 +96,38 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
   return (
     <div ref={ref} className="relative" style={{ height: `${total * 85}vh` }} id="motion">
       <div className="sticky top-16 h-[calc(100vh-4rem)] overflow-hidden bg-[#061A14]">
-        {/* Visual layer */}
-        {CHAPTERS.map((c, i) => (
-          <motion.div
-            key={c.video}
-            aria-hidden
-            className="absolute inset-0"
-            style={{ y: drift }}
-            animate={{ opacity: i === Math.min(active, CHAPTERS.length - 1) ? 1 : 0, scale: i === active ? 1.06 : 1.0 }}
-            transition={{ duration: 1.1, ease: "easeInOut" }}
-          >
-            {i === Math.min(active, CHAPTERS.length - 1) ? (
-              <video
-                ref={(el) => {
-                  videos.current[i] = el;
-                }}
-                src={c.video}
-                poster={c.poster}
-                autoPlay={playing}
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="absolute inset-0 w-full h-[112%] object-cover"
-              />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={c.poster} alt="" className="absolute inset-0 w-full h-[112%] object-cover" />
-            )}
-          </motion.div>
-        ))}
+        {/* Visual layer: every chapter keeps its own video; neighbours of the active one play so cross-fades stay in motion */}
+        <motion.div aria-hidden className="absolute inset-0 will-change-transform" style={{ y: drift }}>
+          {CHAPTERS.map((c, i) => {
+            const cur = Math.min(active, CHAPTERS.length - 1);
+            const live = Math.abs(i - cur) <= 1;
+            return (
+              <div
+                key={c.video}
+                className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                style={{ opacity: i === cur ? 1 : 0 }}
+              >
+                <video
+                  ref={(el) => {
+                    videos.current[i] = el;
+                  }}
+                  poster={c.poster}
+                  muted
+                  loop
+                  playsInline
+                  disablePictureInPicture
+                  autoPlay={live && playing}
+                  preload={live ? "auto" : "metadata"}
+                  className="absolute inset-0 w-full h-[112%] object-cover"
+                >
+                  {videoSources(c.video).map((src) => (
+                    <source key={src} src={src} type="video/mp4" />
+                  ))}
+                </video>
+              </div>
+            );
+          })}
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#061A14]/90 via-[#061A14]/45 to-[#061A14]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#061A14]/85 via-transparent to-[#061A14]/40" />
 
