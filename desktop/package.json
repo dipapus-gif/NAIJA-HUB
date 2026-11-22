@@ -17,6 +17,7 @@
     "appId": "app.naijahub.desktop",
     "productName": "Naija Hub",
     "files": ["main.js", "offline.html", "build/icon.png"],
+    "publish": [{ "provider": "github", "owner": "dipapus-gif", "repo": "NAIJA-HUB", "releaseType": "release" }],
     "win": { "target": ["nsis", "portable"], "icon": "build/icon.png" },
     "mac": { "target": ["dmg"], "category": "public.app-category.utilities", "icon": "build/icon.png" },
     "linux": { "target": ["AppImage", "deb"], "category": "Utility", "icon": "build/icon.png" }

@@ -2,7 +2,7 @@ const { app, BrowserWindow, Menu, shell, nativeTheme } = require("electron");
 const path = require("path");
 
 // Set NAIJA_HUB_URL to override (e.g. http://localhost:3000 for development).
-const APP_URL = process.env.NAIJA_HUB_URL || "https://naija-hub.vercel.app";
+const APP_URL = process.env.NAIJA_HUB_URL || "https://naija-hub-nine.vercel.app";
 const APP_ORIGIN = new URL(APP_URL).origin;
 
 function createWindow() {

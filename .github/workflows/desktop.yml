@@ -3,9 +3,12 @@ on:
   push:
     tags: ["desktop-v*"]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -15,15 +18,8 @@ jobs:
         with: { node-version: 22 }
       - run: npm install
         working-directory: desktop
-      - run: npx electron-builder --publish never
+      - run: npx electron-builder --publish always
         working-directory: desktop
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: naija-hub-${{ matrix.os }}
-          path: |
-            desktop/dist/*.exe
-            desktop/dist/*.dmg
-            desktop/dist/*.AppImage
-            desktop/dist/*.deb

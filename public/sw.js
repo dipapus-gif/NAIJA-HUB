@@ -1,7 +1,8 @@
-const CACHE_NAME = "naija-hub-offline-v1";
+const CACHE_NAME = "naija-hub-offline-v2";
 const PRECACHE_ASSETS = [
   "/",
   "/manifest.webmanifest",
+  "/images/icon-192.png",
   "/images/naija-hub-icon.png",
   "/images/story-dawn-commute.jpg",
   "/images/story-up-nepa.jpg",
@@ -42,6 +43,7 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith("/api/") || request.headers.has("range")) return;
 
   event.respondWith(
     fetch(request)

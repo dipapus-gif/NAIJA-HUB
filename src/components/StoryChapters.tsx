@@ -1,5 +1,7 @@
 "use client";
 
+import { LazyVideo } from "./site/LazyVideo";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -349,7 +351,7 @@ export function StoryChapters({
             {/* Left Media Reel: Video + Photo Inset */}
             <div className="lg:col-span-6 space-y-4">
               <div className="relative rounded-3xl overflow-hidden shadow-xl border border-stone-200 bg-stone-950 aspect-[16/10] group">
-                <video
+                <LazyVideo
                   src="https://videos.pexels.com/video-files/27706410/12209725_3840_2160_25fps.mp4"
                   poster="/images/story-dawn-commute.jpg"
                   autoPlay
@@ -821,7 +823,7 @@ export function StoryChapters({
             {/* Right Media Reel: Nigerian Market Video + Staples Editorial Photo */}
             <div className="lg:col-span-6 order-1 lg:order-2 space-y-4">
               <div className="relative rounded-3xl overflow-hidden shadow-xl border border-stone-200 bg-stone-950 aspect-[16/10] group">
-                <video
+                <LazyVideo
                   src="https://videos.pexels.com/video-files/27165160/12087844_3840_2160_25fps.mp4"
                   poster="/images/story-market-fuel.jpg"
                   autoPlay
@@ -1231,7 +1233,7 @@ export function StoryChapters({
             {/* Right Media Reel: Flickering Bulb Video + Prepaid Meter Compound Photo */}
             <div className="lg:col-span-6 order-1 lg:order-2 space-y-4">
               <div className="relative rounded-3xl overflow-hidden shadow-xl border border-stone-200 bg-stone-950 aspect-[16/10] group">
-                <video
+                <LazyVideo
                   src="https://videos.pexels.com/video-files/853772/853772-hd_1920_1080_25fps.mp4"
                   poster="/images/story-up-nepa.jpg"
                   autoPlay
@@ -1355,7 +1357,7 @@ export function StoryChapters({
                   />
                 </div>
                 <div className="relative rounded-2xl overflow-hidden border border-stone-800 aspect-[4/4]">
-                  <video
+                  <LazyVideo
                     src="https://videos.pexels.com/video-files/28925673/12518915_3840_2160_30fps.mp4"
                     poster="/images/story-dawn-commute.jpg"
                     autoPlay

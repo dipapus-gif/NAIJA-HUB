@@ -105,18 +105,24 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
             animate={{ opacity: i === Math.min(active, CHAPTERS.length - 1) ? 1 : 0, scale: i === active ? 1.06 : 1.0 }}
             transition={{ duration: 1.1, ease: "easeInOut" }}
           >
-            <video
-              ref={(el) => {
-                videos.current[i] = el;
-              }}
-              src={c.video}
-              poster={c.poster}
-              muted
-              loop
-              playsInline
-              preload={i === 0 ? "auto" : "none"}
-              className="absolute inset-0 w-full h-[112%] object-cover"
-            />
+            {i === Math.min(active, CHAPTERS.length - 1) ? (
+              <video
+                ref={(el) => {
+                  videos.current[i] = el;
+                }}
+                src={c.video}
+                poster={c.poster}
+                autoPlay={playing}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="absolute inset-0 w-full h-[112%] object-cover"
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={c.poster} alt="" className="absolute inset-0 w-full h-[112%] object-cover" />
+            )}
           </motion.div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-[#061A14]/90 via-[#061A14]/45 to-[#061A14]/10" />

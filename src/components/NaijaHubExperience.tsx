@@ -1,5 +1,7 @@
 "use client";
 
+import { LazyVideo } from "./site/LazyVideo";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
@@ -459,7 +461,7 @@ export function NaijaHubExperience() {
         className="relative min-h-[88vh] flex items-center overflow-hidden border-b border-emerald-900/70"
       >
         {/* Background Lagos Aerial Video */}
-        <video
+        <LazyVideo
           src="https://videos.pexels.com/video-files/29103994/12573651_3840_2160_30fps.mp4"
           poster="/images/story-dawn-commute.jpg"
           autoPlay
@@ -750,6 +752,8 @@ export function NaijaHubExperience() {
             >
               Run 18/18 Calculation Tests
             </button>
+            <span>•</span>
+            <a href="https://github.com/dipapus-gif/NAIJA-HUB/releases/latest" target="_blank" rel="noopener noreferrer" className="hover:text-white">Desktop app</a>
             <span>•</span>
             <Link href="/terms" className="hover:text-white">Terms</Link>
             <span>•</span>
