@@ -90,3 +90,16 @@ html:not([data-theme="light"]) .border-amber-200 { border-color: #1d4a37 !import
 html[data-theme="light"] .min-h-screen.bg-\[\#061A14\] { background-color: #f6f3ea; color: #1c1917; }
 html[data-theme="light"] .site-foot { border-color: #d6d3d1; color: #57534e; }
 html[data-theme="light"] .site-foot a:hover { color: #065f46; }
+
+/* ---------- Print: only the invoice ---------- */
+@media print {
+  body * { visibility: hidden !important; }
+  #invoice-print, #invoice-print * { visibility: visible !important; }
+  #invoice-print { position: absolute; left: 0; top: 0; width: 100%; background: #fff !important; color: #000 !important; box-shadow: none !important; border: 0 !important; }
+  #invoice-print * { color: #000 !important; background: transparent !important; }
+}
+
+/* Cheap compositor-only float for the finale chips */
+@keyframes nh-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.nh-float { animation: nh-float 3s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .nh-float { animation: none; } }

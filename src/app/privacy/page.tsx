@@ -5,21 +5,23 @@ export const metadata: Metadata = { title: "Privacy Policy — Naija Hub" };
 
 export default function PrivacyPage() {
   return (
-    <LegalDoc title="Privacy Policy" updated="21 November 2026">
-      <p>This policy explains what personal data Naija Hub collects, why, and the choices you have. It is written with the Nigeria Data Protection Act 2023 (NDPA) in mind.</p>
+    <LegalDoc title="Privacy Policy" updated="22 November 2026">
+      <p>This policy explains what personal data Naija Hub collects, why, and the choices you have. It is written with the Nigeria Data Protection Act 2023 (NDPA) in mind. For a line-by-line list of every kind of data we handle, where it is stored and how long it is kept, see our <a href="/data-inventory">Data Inventory</a>.</p>
 
       <h2>1. Data we collect</h2>
       <ul>
         <li><strong>Account data:</strong> your name, email address and a salted, hashed password (we never store your password in readable form).</li>
         <li><strong>Community reports you submit:</strong> area, street, price, transit or power-status details. These are shown to other users without your name.</li>
         <li><strong>Health requests you submit (sensitive):</strong> if you use the Health hub to record an appointment, antenatal or hospital-bed request, we store the patient's name, phone number, chosen hospital, preferred time and short notes you type. Health information is special-category personal data under the NDPA, so we ask for your consent first, collect only what the form needs, and use it only to give you a reference and let you track the request. We do not send these requests to hospitals, and we do not sell or share them.</li>
+        <li><strong>Ajo circle data (financial):</strong> if you create or join a circle, we store the circle name and contribution, the organiser’s pool account details (bank, account number, account name), members’ names, phone numbers and payout accounts, and the payment and payout references you enter. Members see the circle, pool account and payment status; only the organiser sees phone numbers and payout accounts. Naija Hub does not hold or move money.</li>
         <li><strong>AI co-pilot messages:</strong> the questions you type and the tool context needed to answer them.</li>
         <li><strong>Technical data:</strong> basic server logs (IP address, browser, timestamps) and a session cookie that keeps you logged in.</li>
-        <li><strong>Preferences:</strong> your theme and language, stored on your device.</li>
+        <li><strong>Preferences:</strong> your theme, language and state, stored on your device.</li>
+        <li><strong>Toolkit records:</strong> data you enter in the Toolkit (debts, shop sales, savings, invoices, health notes, job applications and so on) is stored in your browser only and is not sent to us.</li>
       </ul>
 
       <h2>2. Data that stays on your device</h2>
-      <p>Bills, Ajo/Esusu groups, saved beneficiaries, blocklists, personal prices and light history are stored in your device’s local storage. We do not receive them.</p>
+      <p>Bills, local Ajo/Esusu notes, saved beneficiaries, blocklists, personal prices, light history and all Toolkit records are stored in your device’s local storage. We do not receive them, and clearing your browser data deletes them.</p>
 
       <h2>3. How we use data</h2>
       <ul>
@@ -32,13 +34,13 @@ export default function PrivacyPage() {
       <p>Our lawful bases are performance of our contract with you, our legitimate interests in running a safe service, and your consent where required. We do not sell your personal data and we do not show third-party advertising.</p>
 
       <h2>4. Service providers</h2>
-      <p>We use trusted processors to run the Service: Vercel (hosting), Neon (database) and, when enabled, an AI model provider reached through Vercel AI Gateway to generate co-pilot replies. They process data only to provide their services to us. Some are located outside Nigeria; where data is transferred abroad we rely on appropriate safeguards under the NDPA.</p>
+      <p>We use trusted processors to run the Service: Vercel (hosting and server logs), Neon (database) and, when enabled, an AI model provider reached through Vercel AI Gateway to generate co-pilot replies. The background videos load from Pexels (videos.pexels.com), which can see your IP address and browser type when they load. They process data only to provide their services to us. Some are located outside Nigeria; where data is transferred abroad we rely on appropriate safeguards under the NDPA.</p>
 
       <h2>5. Cookies and local storage</h2>
       <p>We use one essential, HTTP-only session cookie to keep you logged in, and local storage for theme, language and offline data. We do not use advertising cookies.</p>
 
       <h2>6. Retention</h2>
-      <p>Account data is kept while your account is active. Community reports may be retained in anonymous form. Server logs are kept for a short period for security and debugging. Delete your account and we remove your account data, except where we must keep it by law.</p>
+      <p>Account data is kept while your account is active. Health requests and Ajo circle records are kept until you ask us to delete them; we have not yet built automatic expiry for them. Community reports may be retained in anonymous form. Server logs are kept for a short period for security and debugging. Delete your account and we remove your account data, except where we must keep it by law.</p>
 
       <h2>7. Your rights</h2>
       <p>You may ask to access, correct, delete or export your personal data, object to or restrict certain processing, withdraw consent, and complain to the Nigeria Data Protection Commission. Email <a href="mailto:privacy@naijahub.app">privacy@naijahub.app</a> and we will respond within a reasonable time.</p>
@@ -53,7 +55,7 @@ export default function PrivacyPage() {
       <p>We may update this policy and will post the new date above. For material changes we will notify you in the Service.</p>
 
       <h2>11. Contact</h2>
-      <p>Naija Hub — <a href="mailto:privacy@naijahub.app">privacy@naijahub.app</a>.</p>
+      <p>Naija Hub — <a href="mailto:privacy@naijahub.app">privacy@naijahub.app</a>. See also the <a href="/terms">Terms of Service</a> and the <a href="/data-inventory">Data Inventory</a>.</p>
 
       <p className="text-xs text-stone-500 mt-8">This document is a general template and has not been reviewed by a lawyer. Have it reviewed by qualified Nigerian counsel, and replace the contact addresses with ones you control, before launch.</p>
     </LegalDoc>

@@ -245,17 +245,17 @@ export function StoryChapters({
         >
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/90 text-amber-300 font-mono text-xs tracking-wider uppercase mb-4">
             <Sparkles className="w-3.5 h-3.5" />
-            {lang === "en"
+            {lang !== "pcm"
               ? "Visual Documentary • 5 Chapters in Motion"
               : "Street Documentary • 5 Tori Inside Video & Picture"}
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-stone-950 mb-4">
-            {lang === "en"
+            {lang !== "pcm"
               ? "Why juggle six heavy apps when one offline hub works on 1-bar data?"
               : "Why you go carry six heavy app when one small offline hub fit run everything?"}
           </h2>
           <p className="text-base sm:text-lg text-stone-600 leading-relaxed">
-            {lang === "en"
+            {lang !== "pcm"
               ? "At 05:59 AM on 11/21/2026, LIET sketched the blueprint for a Nigerian utilities super-app. At 06:00 AM, the offline engine and calculation tests were ready. Walk through a single Nigerian day below — every video, photograph, and live crowd widget tells the story."
               : "By 05:59 AM on 11/21/2026, LIET drop the idea for Naija super-app. By 06:00 AM, the code and calculation test don set. Follow one full day for Naija below — video, picture, and live street update dey inside."}
           </p>
@@ -390,7 +390,7 @@ export function StoryChapters({
                       Lagos • Abuja • Port Harcourt • Kano
                     </p>
                     <p className="text-white font-semibold text-lg">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Before you enter danfo or keke, know the real fare & flood spots."
                         : "Before you jump enter danfo or keke, sabi the real fare & water-log road."}
                     </p>
@@ -412,7 +412,7 @@ export function StoryChapters({
                     WEAK-DATA DESIGN
                   </p>
                   <p className="text-sm text-stone-200 leading-snug">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Heavy map apps choke on 1-bar E/3G at bus stops. Cached corridor fares and flood flags load in under 15 KB."
                       : "Big map app dey hang when network drop for bus stop. Naija Hub cache bus-stop price so e dey open sharp-sharp."}
                   </p>
@@ -430,7 +430,7 @@ export function StoryChapters({
                     </div>
                     <div>
                       <h3 className="font-display text-xl font-bold text-stone-950">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Transport Helper & Flood Alerts"
                           : "Danfo / Keke Price & Flood Alert"}
                       </h3>
@@ -448,7 +448,7 @@ export function StoryChapters({
                     className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-stone-900 text-white hover:bg-emerald-900 transition"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    {lang === "en" ? "Report Route" : "Drop Road Update"}
+                    {lang !== "pcm" ? "Report Route" : "Drop Road Update"}
                   </button>
                 </div>
 
@@ -606,7 +606,7 @@ export function StoryChapters({
 
                 <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
                   <span className="text-stone-500">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Driving your own car instead?"
                       : "You wan drive your own motor?"}
                   </span>
@@ -615,7 +615,7 @@ export function StoryChapters({
                     onClick={() => onJumpToUtility("fuel")}
                     className="font-semibold text-emerald-800 hover:text-emerald-950 underline underline-offset-4"
                   >
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Calculate Trip Fuel Cost →"
                       : "Check Motor Trip Fuel →"}
                   </button>
@@ -644,12 +644,12 @@ export function StoryChapters({
                     </div>
                     <div>
                       <h3 className="font-display text-xl font-bold text-stone-950">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Fuel & Market Staples Watch"
                           : "Pump Price & Market Food Watch"}
                       </h3>
                       <p className="text-xs text-stone-500">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Crowd-sourced PMS, diesel, gas, rice, garri & beans"
                           : "Street price for petrol, gas, rice, garri & beans"}
                       </p>
@@ -662,16 +662,16 @@ export function StoryChapters({
                     className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-stone-900 text-white hover:bg-emerald-900 transition"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    {lang === "en" ? "Log Station / Market" : "Add Market Price"}
+                    {lang !== "pcm" ? "Log Station / Market" : "Add Market Price"}
                   </button>
                 </div>
 
                 <div className="flex gap-2 mb-4">
                   {(
                     [
-                      ["ALL", lang === "en" ? "All Items" : "Everything"],
-                      ["FUEL", lang === "en" ? "Fuel & Gas" : "Petrol & Gas"],
-                      ["STAPLE", lang === "en" ? "Rice, Garri & Beans" : "Foodstuff"],
+                      ["ALL", lang !== "pcm" ? "All Items" : "Everything"],
+                      ["FUEL", lang !== "pcm" ? "Fuel & Gas" : "Petrol & Gas"],
+                      ["STAPLE", lang !== "pcm" ? "Rice, Garri & Beans" : "Foodstuff"],
                     ] as const
                   ).map(([key, label]) => (
                     <button
@@ -819,7 +819,7 @@ export function StoryChapters({
 
                 <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
                   <span className="text-stone-500">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Want your own private market price notebook?"
                       : "You wan keep your own personal market price list?"}
                   </span>
@@ -828,7 +828,7 @@ export function StoryChapters({
                     onClick={() => onJumpToUtility("price")}
                     className="font-semibold text-emerald-800 hover:text-emerald-950 underline underline-offset-4"
                   >
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Open Personal Price Watch →"
                       : "Open My Price Notebook →"}
                   </button>
@@ -875,7 +875,7 @@ export function StoryChapters({
                     Pump Stations &amp; Staple Sacks
                   </p>
                   <p className="text-white font-semibold text-lg">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "From NNPC pump queues to Mile 12 garri & honey beans — know today's price before bargaining."
                       : "From filling station reach Mile 12 garri & oloyin beans — sabi today price before you price market."}
                   </p>
@@ -888,7 +888,7 @@ export function StoryChapters({
                     DELTA TRACKING
                   </p>
                   <p className="text-sm text-stone-200 leading-snug">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Every entry compares automatically against the last logged price so your household budget spots spikes early."
                       : "Anytime you type new price, Naija Hub go show you sharp-sharp how much join or comot since last week."}
                   </p>
@@ -933,7 +933,7 @@ export function StoryChapters({
                     Verify &amp; Report • Consumer Safety
                   </p>
                   <p className="text-white font-semibold text-lg">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Check NAFDAC numbers on medicines & water before buying — and spot fake bank alerts in seconds."
                       : "Confirm NAFDAC number for medicine & pure water before you buy — and catch fake alert sharp-sharp."}
                   </p>
@@ -950,12 +950,12 @@ export function StoryChapters({
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Verify NAFDAC Reg. Number"
                         : "Check NAFDAC Number"}
                     </h3>
                     <p className="text-xs text-stone-500">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Try presets from cached Greenbook sample or inspect flagged batches"
                         : "Press sample code below make you test genuine vs fake alert"}
                     </p>
@@ -1047,7 +1047,7 @@ export function StoryChapters({
 
                 <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
                   <span className="text-stone-500">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Suspicious bank call, BVN message or fake alert?"
                       : "Person send you suspicious alert or BVN link?"}
                   </span>
@@ -1056,7 +1056,7 @@ export function StoryChapters({
                     onClick={() => onJumpToUtility("scam")}
                     className="font-semibold text-emerald-800 hover:text-emerald-950 underline underline-offset-4"
                   >
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Open Scam Check & Blocklist →"
                       : "Open Shine Your Eye Tool →"}
                   </button>
@@ -1085,7 +1085,7 @@ export function StoryChapters({
                     </div>
                     <div>
                       <h3 className="font-display text-xl font-bold text-white">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Community NEPA Street Tracker"
                           : "Street-by-Street NEPA Light Update"}
                       </h3>
@@ -1111,7 +1111,7 @@ export function StoryChapters({
                     className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-400 text-stone-950 hover:bg-amber-300 transition"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    {lang === "en" ? "Report Your Street" : "Update Your Street"}
+                    {lang !== "pcm" ? "Report Your Street" : "Update Your Street"}
                   </button>
                 </div>
 
@@ -1229,7 +1229,7 @@ export function StoryChapters({
 
                 <div className="mt-4 pt-3 border-t border-emerald-800/70 flex items-center justify-between text-xs">
                   <span className="text-emerald-300/80">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Track your own flat's daily supply hours & meter tokens:"
                       : "Log your own house NEPA hour & prepaid token:"}
                   </span>
@@ -1238,7 +1238,7 @@ export function StoryChapters({
                     onClick={() => onJumpToUtility("light")}
                     className="font-semibold text-amber-300 hover:text-amber-200 underline underline-offset-4"
                   >
-                    {lang === "en" ? "Open Light Tracker →" : "Open Light Tracker →"}
+                    {lang !== "pcm" ? "Open Light Tracker →" : "Open Light Tracker →"}
                   </button>
                 </div>
               </div>
@@ -1283,7 +1283,7 @@ export function StoryChapters({
                     Grid vs Generator Economics
                   </p>
                   <p className="text-white font-semibold text-lg">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Is your feeder really giving 20 hours for Band A tariff — and how much is your generator costing per kWh?"
                       : "Your Band A light really reach 20 hours every day? And how much your gen dey chop per kWh?"}
                   </p>
@@ -1303,7 +1303,7 @@ export function StoryChapters({
                     <Flame className="w-3.5 h-3.5" /> REAL TOKEN KWH MATH
                   </p>
                   <p className="text-xs sm:text-sm text-stone-800 leading-snug">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Punch in ₦20,000 and your 20-digit token units: Naija Hub reveals your exact ₦/kWh vs petrol generator cost."
                       : "Put how much token you buy and the unit wey enter meter: you go see your true ₦/kWh sharp-sharp."}
                   </p>
@@ -1328,12 +1328,12 @@ export function StoryChapters({
                   CHAPTER 05 • 09:00 PM → 06:00 BUILD
                 </span>
                 <h3 className="font-display text-2xl sm:text-4xl font-bold text-white leading-tight">
-                  {lang === "en"
+                  {lang !== "pcm"
                     ? "Evening Ajo rounds, Friday suya splits, PAYE salary checks & USSD lifelines — all without touching mobile data."
                     : "Evening Ajo contribution, Friday suya bill share, salary PAYE check & bank USSD — zero data needed."}
                 </h3>
                 <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
-                  {lang === "en"
+                  {lang !== "pcm"
                     ? "Money trust is built in circles: monthly Esusu rotations, splitting delivery riders fairly, checking street FX before paying overseas tuition, and dialing *737# or 112 when data drops to zero. Below, step straight into LIET's full 10-utility app."
                     : "From monthly Esusu turn reach how una go share dispatch rider money or press *737# when data finish — test all 10 offline tools for browser or phone view right below."}
                 </p>
@@ -1343,21 +1343,21 @@ export function StoryChapters({
                     onClick={() => onJumpToUtility("ajo")}
                     className="px-4 py-2.5 rounded-xl bg-amber-400 text-stone-950 font-semibold text-sm hover:bg-amber-300 transition"
                   >
-                    {lang === "en" ? "Try Ajo / Esusu Tracker" : "Open Ajo / Esusu"}
+                    {lang !== "pcm" ? "Try Ajo / Esusu Tracker" : "Open Ajo / Esusu"}
                   </button>
                   <button
                     type="button"
                     onClick={() => onJumpToUtility("split")}
                     className="px-4 py-2.5 rounded-xl bg-stone-800 text-stone-100 font-semibold text-sm hover:bg-stone-700 border border-stone-700 transition"
                   >
-                    {lang === "en" ? "Split a Suya Bill" : "Share Suya Bill"}
+                    {lang !== "pcm" ? "Split a Suya Bill" : "Share Suya Bill"}
                   </button>
                   <button
                     type="button"
                     onClick={() => onJumpToUtility("tax")}
                     className="px-4 py-2.5 rounded-xl bg-stone-800 text-stone-100 font-semibold text-sm hover:bg-stone-700 border border-stone-700 transition"
                   >
-                    {lang === "en" ? "Check PAYE & VAT" : "Check Salary Tax"}
+                    {lang !== "pcm" ? "Check PAYE & VAT" : "Check Salary Tax"}
                   </button>
                 </div>
               </div>

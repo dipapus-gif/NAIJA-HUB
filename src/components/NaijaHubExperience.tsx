@@ -3,7 +3,7 @@
 import { LazyVideo } from "./site/LazyVideo";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import {
   ArrowDown,
   CheckCircle2,
@@ -18,7 +18,7 @@ import {
   WifiOff,
   Zap,
 } from "lucide-react";
-import { COPY, type Lang } from "@/lib/i18n";
+import { COPY, LANGS, pick, type Lang } from "@/lib/i18n";
 import {
   DEFAULT_DEVICE_STATE,
   getDeviceStorageBytes,
@@ -33,13 +33,16 @@ import {
   type NepaReportItem,
   type TransitRouteItem,
 } from "./StoryChapters";
-import { UtilitiesWorkbench, type UtilityKey } from "./UtilitiesWorkbench";
-import { CalcTestModal } from "./CalcTestModal";
+import type { UtilityKey } from "./UtilitiesWorkbench";
+const UtilitiesWorkbench = dynamic(() => import("./UtilitiesWorkbench").then((m) => m.UtilitiesWorkbench), { ssr: false, loading: () => <div className="min-h-[60vh]" aria-hidden /> });
+const CalcTestModal = dynamic(() => import("./CalcTestModal").then((m) => m.CalcTestModal), { ssr: false });
 import Link from "next/link";
 import { ThemeToggle } from "./site/ThemeToggle";
 import { AccountMenu } from "./site/AccountMenu";
-import { Copilot } from "./site/Copilot";
+import dynamic from "next/dynamic";
+const Copilot = dynamic(() => import("./site/Copilot").then((m) => m.Copilot), { ssr: false });
 import { MotionStage } from "./site/MotionStage";
+import { StoryDay } from "./site/StoryDay";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -109,6 +112,23 @@ const FALLBACK_COMMUNITY = {
 
 export function NaijaHubExperience() {
   const [lang, setLang] = useState<Lang>("en");
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("naija_hub_lang") as Lang | null;
+      if (saved && LANGS.some((l) => l.key === saved)) setLang(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+  const changeLang = (l: Lang) => {
+    setLang(l);
+    try {
+      window.localStorage.setItem("naija_hub_lang", l);
+    } catch {
+      /* storage unavailable */
+    }
+    document.documentElement.lang = l === "pcm" ? "en" : l;
+  };
   const [networkMode, setNetworkMode] = useState<
     "ONLINE" | "WEAK_3G" | "OFFLINE"
   >("ONLINE");
@@ -138,11 +158,7 @@ export function NaijaHubExperience() {
   );
 
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    restDelta: 0.001,
-  });
+  const scaleX = scrollYProgress; // direct, no spring: one fewer animation loop while scrolling
 
   // Hydrate offline device state + register Service Worker + PWA prompt listener
   useEffect(() => {
@@ -342,7 +358,7 @@ export function NaijaHubExperience() {
       />
 
       {/* Sticky Navigation Bar */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#061A14]/88 border-b border-emerald-900/80">
+      <header className="sticky top-0 z-40 bg-[#061A14]/95 border-b border-emerald-900/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
           {/* Brand Logo */}
           <a href="#top" className="flex items-center gap-2.5 group">
@@ -364,13 +380,19 @@ export function NaijaHubExperience() {
           {/* Center Nav Anchors */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-emerald-100/90">
             <a href="#story" className="hover:text-amber-300 transition">
-              {lang === "en" ? "Visual Story (5 Reels)" : "Street Video Torí"}
+              {pick(lang, "Visual Story (5 Reels)", "Street Video Torí", "Ìtàn àwòrán", "Labarin hotuna", "Akụkọ onyonyo")}
             </a>
+            <Link href="/tools" className="hover:text-amber-300 transition">
+              {pick(lang, "Toolkit", "Toolkit", "Àpótí irinṣẹ́", "Akwatin kayan aiki", "Igbe ngwa")}
+            </Link>
+            <Link href="/ajo" className="hover:text-amber-300 transition">
+              {pick(lang, "Ajo circles", "Ajo circles", "Àjọ", "Ajo", "Ajo")}
+            </Link>
             <Link href="/health" className="hover:text-amber-300 transition">
-              {lang === "en" ? "Health & Emergency" : "Hospital & Emergency"}
+              {pick(lang, "Health & Emergency", "Hospital & Emergency", "Ìlera àti pàjáwìrì", "Lafiya da gaggawa", "Ahụike na ihe mberede")}
             </Link>
             <a href="#utilities" className="hover:text-amber-300 transition">
-              {lang === "en" ? "10 Offline Utilities" : "All 10 Tools"}
+              {pick(lang, "10 Offline Utilities", "All 10 Tools", "Irinṣẹ́ mẹ́wàá", "Kayan aiki 10", "Ngwa iri")}
             </a>
             <button
               type="button"
@@ -378,7 +400,7 @@ export function NaijaHubExperience() {
               className="inline-flex items-center gap-1.5 hover:text-amber-300 transition cursor-pointer"
             >
               <Terminal className="w-3.5 h-3.5 text-amber-400" />
-              <span>{lang === "en" ? "Calc Tests (18/18)" : "Maths Test"}</span>
+              <span>{lang !== "pcm" ? "Calc Tests (18/18)" : "Maths Test"}</span>
             </button>
           </nav>
 
@@ -414,31 +436,17 @@ export function NaijaHubExperience() {
               )}
             </button>
 
-            {/* EN / PIDGIN Bilingual Switch */}
-            <div className="inline-flex rounded-full bg-emerald-950 p-0.5 border border-emerald-800">
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition cursor-pointer ${
-                  lang === "en"
-                    ? "bg-amber-400 text-stone-950"
-                    : "text-emerald-200 hover:text-white"
-                }`}
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("pcm")}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition cursor-pointer ${
-                  lang === "pcm"
-                    ? "bg-amber-400 text-stone-950"
-                    : "text-emerald-200 hover:text-white"
-                }`}
-              >
-                PIDGIN
-              </button>
-            </div>
+            {/* Language switch: English, Pidgin, Yorùbá, Hausa, Igbo */}
+            <select
+              aria-label="Language"
+              value={lang}
+              onChange={(e) => changeLang(e.target.value as Lang)}
+              className="rounded-full bg-emerald-950 border border-emerald-800 text-amber-300 text-[11px] font-bold px-2.5 py-1.5 cursor-pointer outline-none"
+            >
+              {LANGS.map((l) => (
+                <option key={l.key} value={l.key}>{l.label}</option>
+              ))}
+            </select>
 
             <button
               type="button"
@@ -460,20 +468,35 @@ export function NaijaHubExperience() {
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex-1">
             <h2 className="font-display font-bold text-xl text-white">
-              {lang === "en" ? "Health & Emergency, in all 36 states + FCT" : "Hospital & Emergency for all 36 states + FCT"}
+              {lang !== "pcm" ? "Health & Emergency, in all 36 states + FCT" : "Hospital & Emergency for all 36 states + FCT"}
             </h2>
             <p className="text-sm text-emerald-100/80 mt-1">
-              {lang === "en"
+              {lang !== "pcm"
                 ? "Road-accident steps, pregnancy danger signs, hospitals near you, and appointment, antenatal and bed requests."
                 : "Accident steps, belle-woman warning signs, hospital near you, plus appointment, antenatal and bed request."}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <a href="tel:112" className="px-4 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">Call 112</a>
-            <Link href="/health" className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold">{lang === "en" ? "Open Health hub" : "Open Health"}</Link>
+            <Link href="/health" className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold">{lang !== "pcm" ? "Open Health hub" : "Open Health"}</Link>
           </div>
         </div>
       </section>
+
+      {/* Toolkit strip + story */}
+      <section className="border-b border-emerald-900/70 bg-[#082018]">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex-1">
+            <h2 className="font-display font-bold text-xl text-white">{pick(lang, "New: the Toolkit, 17 tools for everyday life and tech work", "New: Toolkit, 17 tools for hustle and tech work", "Tuntun: Àpótí irinṣẹ́, irinṣẹ́ 17", "Sabo: Akwatin kayan aiki, kayan aiki 17", "Ọhụrụ: Igbe ngwa, ngwa 17")}</h2>
+            <p className="text-sm text-emerald-100/80 mt-1">Data budget, debts, shop ledger, school fees, units, health basics, documents, holidays, invoices, power planner, developer tools and more.</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/tools" className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold">Open Toolkit</Link>
+            <Link href="/ajo" className="px-4 py-2 rounded-full border border-emerald-600 text-emerald-100 hover:border-amber-400 text-xs font-bold">Ajo circles</Link>
+          </div>
+        </div>
+      </section>
+      <StoryDay lang={lang} />
 
       {/* ============================================================= */}
       {/* HERO STAGE: FULL-BLEED LAGOS MOTION VIDEO + LIVE POCKET HUB   */}
@@ -553,7 +576,7 @@ export function NaijaHubExperience() {
                     10-in-1
                   </div>
                   <div className="text-emerald-200/80">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Replaces 6 heavy apps"
                       : "Replace 6 heavy apps"}
                   </div>
@@ -563,7 +586,7 @@ export function NaijaHubExperience() {
                     0 KB Cloud
                   </div>
                   <div className="text-emerald-200/80">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "Personal data stays on phone"
                       : "All data dey your phone"}
                   </div>
@@ -573,7 +596,7 @@ export function NaijaHubExperience() {
                     EN + PCM
                   </div>
                   <div className="text-emerald-200/80">
-                    {lang === "en"
+                    {lang !== "pcm"
                       ? "English & Nigerian Pidgin"
                       : "English & Naija Pidgin"}
                   </div>
@@ -602,15 +625,15 @@ export function NaijaHubExperience() {
                   <div className="p-4 rounded-2xl bg-emerald-950 border border-emerald-800 flex items-center justify-between">
                     <div>
                       <div className="text-[11px] font-mono text-emerald-300">
-                        {lang === "en" ? "YOUR NEPA STATUS" : "YOUR HOUSE LIGHT"}
+                        {lang !== "pcm" ? "YOUR NEPA STATUS" : "YOUR HOUSE LIGHT"}
                       </div>
                       <div className="font-display font-bold text-lg text-white flex items-center gap-1.5 mt-0.5">
                         <Zap className="w-4 h-4 text-amber-400 fill-current" />
                         {deviceState.nepaIsOn
-                          ? lang === "en"
+                          ? lang !== "pcm"
                             ? "UP NEPA! (Grid ON)"
                             : "LIGHT DEY! (ON)"
-                          : lang === "en"
+                          : lang !== "pcm"
                           ? "Outage (On Gen/Inv)"
                           : "NO LIGHT (OFF)"}
                       </div>
@@ -780,6 +803,7 @@ export function NaijaHubExperience() {
             <Link href="/terms" className="hover:text-white">Terms</Link>
             <span>•</span>
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
+            <Link href="/data-inventory" className="hover:text-white">Data inventory</Link>
             <span>•</span>
             <button
               type="button"

@@ -25,6 +25,8 @@ export function PageShell({ children, wide = false }: { children: ReactNode; wid
         <Link href="/terms" className="hover:text-amber-300">Terms of Service</Link>
         <span className="mx-3">•</span>
         <Link href="/privacy" className="hover:text-amber-300">Privacy Policy</Link>
+        <span className="mx-3">•</span>
+        <Link href="/data-inventory" className="hover:text-amber-300">Data Inventory</Link>
       </footer>
     </div>
   );

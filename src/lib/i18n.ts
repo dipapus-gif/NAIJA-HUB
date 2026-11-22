@@ -1,4 +1,21 @@
-export type Lang = "en" | "pcm";
+export type Lang = "en" | "pcm" | "yo" | "ha" | "ig";
+
+export const LANGS: { key: Lang; short: string; label: string }[] = [
+  { key: "en", short: "EN", label: "English" },
+  { key: "pcm", short: "PIDGIN", label: "Pidgin" },
+  { key: "yo", short: "YO", label: "Yorùbá" },
+  { key: "ha", short: "HA", label: "Hausa" },
+  { key: "ig", short: "IG", label: "Igbo" },
+];
+
+/** Pick copy for a language; Yorùbá, Hausa and Igbo fall back to English where no translation exists. */
+export function pick(lang: Lang, en: string, pcm: string, yo?: string, ha?: string, ig?: string): string {
+  if (lang === "pcm") return pcm;
+  if (lang === "yo") return yo ?? en;
+  if (lang === "ha") return ha ?? en;
+  if (lang === "ig") return ig ?? en;
+  return en;
+}
 
 export interface UssdEntry {
   id: string;
@@ -169,6 +186,92 @@ export const OFFLINE_CODES: UssdEntry[] = [
   },
 ];
 
+
+const COPY_YO = {
+  badgeTime: "05:59 → 06:00 • LAGOS / ABUJA / PH / KANO",
+  heroTitle: "Ohun-èlò kan ṣoṣo fún ìgbésí ayé ojoojúmọ́ ní Naija.",
+  heroSubtitle:
+    "Ọ̀pọ̀lọpọ̀ ará Nàìjíríà ń lo ohun-èlò márùn-ún tàbí mẹ́fà tó wúwo lórí ayélujára tó ń kọ̀ fún ríra tókẹ̀n mítà, wíwo owó epo, ṣíṣírò owó oṣù, tàbí ṣíṣe Àjọ oṣooṣù. Naija Hub kó irinṣẹ́ mẹ́wàá tó ń ṣiṣẹ́ láìsí íńtánẹ́ẹ̀tì sínú fóònù rẹ. Gbogbo dátà rẹ wà nínú fóònù rẹ.",
+  ctaOpenApp: "Ṣí àwọn irinṣẹ́ mẹ́wàá",
+  ctaWatchStory: "Wo ìtàn náà",
+  ctaRunTests: "Ṣe àyẹ̀wò ìṣirò",
+  langLabel: "Yorùbá",
+  offlineNote: "Ń ṣiṣẹ́ láìsí íńtánẹ́ẹ̀tì • Dátà wà lórí fóònù rẹ",
+  storyHeader: "Láti àfẹ̀mọ́jú dé Àjọ alẹ́",
+  storySub: "Yí ìsàlẹ̀ láti wo àwòrán òótọ́ ojú pópó àti ìròyìn àwùjọ nípa iná, epo àti ọjà.",
+  workbenchTitle: "Àwọn irinṣẹ́ mẹ́wàá tó ń ṣiṣẹ́ láìsí íńtánẹ́ẹ̀tì",
+  workbenchSub: "Fi sórí Android tàbí iPhone. Gbogbo ìṣirò ń ṣẹlẹ̀ nínú fóònù rẹ.",
+  privacyBanner: "Ìlérí ìpamọ́: àwọn àkọsílẹ̀ rẹ, owó-ìsanwó, Àjọ àti àtòkọ ìdènà wà nínú fóònù rẹ nìkan.",
+  utilities: {
+    light: { name: "Olùtọpa iná", short: "Àkọsílẹ̀ iná NEPA, wákàtí àti owó ₦/kWh" },
+    fuel: { name: "Epo àti agbára", short: "Owó jẹ́nẹ́rétọ̀ àti NEPA, àti epo ìrìn àjò" },
+    price: { name: "Ṣọ́ owó ọjà", short: "Tọpa owó epo, gáàsì, ìrẹsì, gaari àti ìyípadà" },
+    rates: { name: "Owó Náírà", short: "Dọ́là, Pọ́ùn àti Yúrò ní owó ìjọba tàbí ti òpópónà" },
+    tax: { name: "Owó-orí àti VAT", short: "Ṣírò owó tó máa dé ọwọ́ rẹ àti 7.5% VAT" },
+    split: { name: "Pín owó oúnjẹ", short: "Pín dọ́gba tàbí gẹ́gẹ́ bí ohun tí a jẹ" },
+    ajo: { name: "Àjọ / Esusu", short: "Ìyíká ìdásílẹ̀ àti ẹni tó máa gbà tẹ̀lé" },
+    bills: { name: "Ìránnilétí owó-ìsanwó", short: "Ọjọ́ ìsanwó oṣooṣù, àmì ìsanwó àti àwọn nọ́ńbà tí a fipamọ́" },
+    codes: { name: "Kóòdù àti pàjáwìrì", short: "Kóòdù USSD ilé ìfowópamọ́, NAFDAC àti ìpè kan ṣoṣo" },
+    scam: { name: "Àyẹ̀wò ìrẹ́jẹ", short: "Ṣàwárí àmì ìrẹ́jẹ àti dí nọ́ńbà búburú" },
+  },
+};
+const COPY_HA = {
+  badgeTime: "05:59 → 06:00 • LAGOS / ABUJA / PH / KANO",
+  heroTitle: "Manhaja ɗaya don rayuwar yau da kullum a Najeriya.",
+  heroSubtitle:
+    "Mutane da yawa a Najeriya suna amfani da manhajoji biyar ko shida masu nauyi a kan hanyar sadarwa mai rauni don sayen lantarki, duba farashin mai, lissafin albashi, ko gudanar da Ajo na wata-wata. Naija Hub yana tara kayan aiki goma a cikin wayarka waɗanda ke aiki ba tare da intanet ba. Duk bayananka suna cikin wayarka.",
+  ctaOpenApp: "Buɗe kayan aiki guda 10",
+  ctaWatchStory: "Bi labarin",
+  ctaRunTests: "Gwada lissafin",
+  langLabel: "Hausa",
+  offlineNote: "Yana aiki ba tare da intanet ba • Bayanai suna cikin wayarka",
+  storyHeader: "Daga asuba zuwa Ajo na yamma",
+  storySub: "Gungura ƙasa don ganin hotunan titi na gaske da labaran al'umma game da wuta, mai da kasuwa.",
+  workbenchTitle: "Kayan aiki guda 10 marasa buƙatar intanet",
+  workbenchSub: "Sanya a Android ko iPhone. Duk lissafi yana gudana a cikin wayarka.",
+  privacyBanner: "Alkawarin sirri: bayananka, kuɗin da ake biya, Ajo da jerin toshewa suna cikin wayarka kawai.",
+  utilities: {
+    light: { name: "Mai bin diddigin wuta", short: "Rubuta wutar NEPA, awowi da ainihin ₦/kWh" },
+    fuel: { name: "Mai da makamashi", short: "Farashin janareta da NEPA, da man tafiya" },
+    price: { name: "Sa ido kan farashi", short: "Bi farashin mai, gas, shinkafa, gari da canji" },
+    rates: { name: "Farashin Naira", short: "Dala, Fam da Yuro a farashin gwamnati ko na kasuwa" },
+    tax: { name: "Haraji da VAT", short: "Lissafa abin da zai shiga hannunka da VAT 7.5%" },
+    split: { name: "Raba kuɗin abinci", short: "Raba daidai ko bisa abin da aka ci" },
+    ajo: { name: "Ajo / Esusu", short: "Zagayen gudummawa da wanda zai karɓa na gaba" },
+    bills: { name: "Tunatarwar kuɗin biya", short: "Ranakun biyan wata-wata, alamar biya da lambobin da aka ajiye" },
+    codes: { name: "Lambobin USSD da gaggawa", short: "USSD na banki, NAFDAC da kira da taɓawa ɗaya" },
+    scam: { name: "Binciken zamba", short: "Gano alamun zamba da toshe lambobi marasa kyau" },
+  },
+};
+const COPY_IG = {
+  badgeTime: "05:59 → 06:00 • LAGOS / ABUJA / PH / KANO",
+  heroTitle: "Ngwa otu maka ndụ kwa ụbọchị na Naịjirịa.",
+  heroSubtitle:
+    "Ọtụtụ ndị Naịjirịa na-eji ngwa ise ma ọ bụ isii dị arọ n'ịntanetị dị mfe iji zụta tokin mita, lelee ọnụ ahịa mmanụ, gbakọọ ụgwọ ọnwa, ma ọ bụ na-eme Ajo kwa ọnwa. Naija Hub na-etinye ngwa iri na-arụ ọrụ n'enweghị ịntanetị n'ime ekwentị gị. Data gị niile dị n'ime ekwentị gị.",
+  ctaOpenApp: "Mepee ngwa iri",
+  ctaWatchStory: "Soro akụkọ ahụ",
+  ctaRunTests: "Nwaa mgbakọ",
+  langLabel: "Igbo",
+  offlineNote: "Na-arụ ọrụ n'enweghị ịntanetị • Data dị n'ekwentị gị",
+  storyHeader: "Site n'ụtụtụ ruo Ajo abalị",
+  storySub: "Gbadaa ala ka ị hụ ihe ndị e sere n'okporo ụzọ n'ezie na akụkọ obodo gbasara ọkụ, mmanụ na ahịa.",
+  workbenchTitle: "Ngwa iri na-arụ ọrụ n'enweghị ịntanetị",
+  workbenchSub: "Wụnye na Android ma ọ bụ iPhone. Mgbakọ niile na-eme n'ime ekwentị gị.",
+  privacyBanner: "Nkwa nzuzo: ndekọ gị, ụgwọ, Ajo na ndepụta mgbochi dị n'ekwentị gị naanị.",
+  utilities: {
+    light: { name: "Onye na-eso ọkụ", short: "Dekọọ ọkụ NEPA, awa na ezigbo ₦/kWh" },
+    fuel: { name: "Mmanụ na ume", short: "Ọnụ ahịa jenarétọ na NEPA, na mmanụ njem" },
+    price: { name: "Lelee ọnụ ahịa", short: "Soro ọnụ ahịa mmanụ, gas, osikapa, garri na mgbanwe" },
+    rates: { name: "Ọnụ ahịa Naịra", short: "Dollar, Pound na Euro n'ọnụ ahịa gọọmentị ma ọ bụ nke ahịa" },
+    tax: { name: "Ụtụ isi na VAT", short: "Gbakọọ ihe ga-abanye n'aka gị na VAT 7.5%" },
+    split: { name: "Kee ụgwọ nri", short: "Kee n'otu ma ọ bụ dịka ihe e righị" },
+    ajo: { name: "Ajo / Esusu", short: "Okirikiri onyinye na onye ga-anata na-esote" },
+    bills: { name: "Ncheta ụgwọ", short: "Ụbọchị ịkwụ ụgwọ kwa ọnwa, akara ịkwụ ụgwọ na nọmba echekwara" },
+    codes: { name: "Koodu USSD na ihe mberede", short: "USSD ụlọ akụ, NAFDAC na oku otu mkpụrụ aka" },
+    scam: { name: "Nyocha aghụghọ", short: "Chọpụta ihe ngosi aghụghọ na gbochie nọmba ọjọọ" },
+  },
+};
+
 export const COPY = {
   en: {
     badgeTime: "05:59 → 06:00 • LAGOS / ABUJA / PH / KANO",
@@ -292,4 +395,7 @@ export const COPY = {
       },
     },
   },
+  yo: COPY_YO,
+  ha: COPY_HA,
+  ig: COPY_IG,
 } as const;

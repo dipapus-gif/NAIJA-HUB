@@ -377,10 +377,10 @@ export function UtilitiesWorkbench({
             state: nextOn ? "ON" : "OFF",
             timestampIso: nowIso,
             note: nextOn
-              ? lang === "en"
+              ? lang !== "pcm"
                 ? "Up NEPA! Power restored"
                 : "Up NEPA! Light don show"
-              : lang === "en"
+              : lang !== "pcm"
               ? "Grid power went off"
               : "NEPA don take light",
           },
@@ -473,7 +473,7 @@ export function UtilitiesWorkbench({
                 }`}
               >
                 <Laptop className="w-3.5 h-3.5" />
-                {lang === "en" ? "Browser Studio" : "Big Screen"}
+                {lang !== "pcm" ? "Browser Studio" : "Big Screen"}
               </button>
               <button
                 type="button"
@@ -485,7 +485,7 @@ export function UtilitiesWorkbench({
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                {lang === "en" ? "Phone View (iOS/Android)" : "Phone Screen"}
+                {lang !== "pcm" ? "Phone View (iOS/Android)" : "Phone Screen"}
               </button>
             </div>
 
@@ -609,7 +609,7 @@ export function UtilitiesWorkbench({
                         UTILITY 01 • LIGHT TRACKER
                       </span>
                       <h3 className="font-display text-2xl font-bold text-stone-950">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "One-Tap NEPA Log, Daily Hours & Token kWh Cost"
                           : "One-Tap NEPA Switch, Supply Hours & Token Maths"}
                       </h3>
@@ -626,10 +626,10 @@ export function UtilitiesWorkbench({
                     >
                       <Zap className="w-5 h-5 fill-current" />
                       {deviceState.nepaIsOn
-                        ? lang === "en"
+                        ? lang !== "pcm"
                           ? "GRID IS ON — Tap if NEPA Takes Light"
                           : "LIGHT DEY — Tap if NEPA Take Light"
-                        : lang === "en"
+                        : lang !== "pcm"
                         ? "OUTAGE — Tap 'UP NEPA!' When Back"
                         : "NO LIGHT — Tap 'UP NEPA!' When E Show"}
                     </button>
@@ -649,7 +649,7 @@ export function UtilitiesWorkbench({
                       <div className="p-4 rounded-2xl bg-white border border-stone-200">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-xs font-mono font-bold uppercase text-stone-500">
-                            {lang === "en"
+                            {lang !== "pcm"
                               ? "7-Day Supply Hours (Tap Bars to Adjust)"
                               : "7-Day Light Hours (Touch Bar Change Am)"}
                           </span>
@@ -709,7 +709,7 @@ export function UtilitiesWorkbench({
 
                       <div className="p-4 rounded-2xl bg-white border border-stone-200">
                         <h4 className="text-xs font-mono uppercase font-bold text-stone-500 mb-2.5">
-                          {lang === "en" ? "Recent Switch Log" : "Recent Light Log"}
+                          {lang !== "pcm" ? "Recent Switch Log" : "Recent Light Log"}
                         </h4>
                         <div className="space-y-2 max-h-40 overflow-y-auto">
                           {deviceState.lightEvents.map((ev) => (
@@ -753,12 +753,12 @@ export function UtilitiesWorkbench({
                       >
                         <div>
                           <h4 className="font-display font-bold text-lg text-white">
-                            {lang === "en"
+                            {lang !== "pcm"
                               ? "Prepaid Token Real Cost per kWh"
                               : "Prepaid Token True Cost per kWh"}
                           </h4>
                           <p className="text-xs text-emerald-300">
-                            {lang === "en"
+                            {lang !== "pcm"
                               ? "Enter Naira paid & kWh units printed on your token receipt"
                               : "Put how much you pay & the kWh unit wey show for receipt"}
                           </p>
@@ -818,7 +818,7 @@ export function UtilitiesWorkbench({
                             type="submit"
                             className="px-4 py-2.5 rounded-xl bg-amber-400 text-stone-950 font-semibold text-xs hover:bg-amber-300"
                           >
-                            {lang === "en" ? "Save Token" : "Save Receipt"}
+                            {lang !== "pcm" ? "Save Token" : "Save Receipt"}
                           </button>
                         </div>
                       </form>
@@ -871,7 +871,7 @@ export function UtilitiesWorkbench({
                       UTILITY 02 • FUEL &amp; ENERGY
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Generator vs NEPA Cost/kWh + Road Trip Fuel Calculator"
                         : "Generator vs NEPA kWh Cost + Motor Trip Fuel"}
                     </h3>
@@ -1088,7 +1088,7 @@ export function UtilitiesWorkbench({
                       UTILITY 03 • PERSONAL PRICE WATCH
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Log Fuel & Market Prices — See Change Since Last Entry"
                         : "Log Fuel & Market Price — See Wetin Join Since Last Time"}
                     </h3>
@@ -1222,7 +1222,7 @@ export function UtilitiesWorkbench({
                         UTILITY 04 • NAIRA RATES
                       </span>
                       <h3 className="font-display text-2xl font-bold text-stone-950">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Convert USD, GBP & EUR — Official Reference vs Street Rate"
                           : "Change Dollar, Pound & Euro — Official vs Aboki Street Rate"}
                       </h3>
@@ -1403,7 +1403,7 @@ export function UtilitiesWorkbench({
                       UTILITY 05 • TAX &amp; VAT
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Nigeria PAYE Take-Home Salary & 7.5% VAT Calculator"
                         : "Naija Salary PAYE Take-Home & 7.5% VAT Calculator"}
                     </h3>
@@ -1550,7 +1550,7 @@ export function UtilitiesWorkbench({
                         UTILITY 06 • SPLIT THE BILL
                       </span>
                       <h3 className="font-display text-2xl font-bold text-stone-950">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Equal Split or Pay What You Ordered + Shared Delivery/Tip"
                           : "Share Equal-Equal or Pay Wetin You Chop + Rider Money"}
                       </h3>
@@ -1566,7 +1566,7 @@ export function UtilitiesWorkbench({
                             : "text-stone-700"
                         }`}
                       >
-                        {lang === "en" ? "By Order" : "Wetin You Chop"}
+                        {lang !== "pcm" ? "By Order" : "Wetin You Chop"}
                       </button>
                       <button
                         type="button"
@@ -1577,7 +1577,7 @@ export function UtilitiesWorkbench({
                             : "text-stone-700"
                         }`}
                       >
-                        {lang === "en" ? "Equal Split" : "Equal-Equal"}
+                        {lang !== "pcm" ? "Equal Split" : "Equal-Equal"}
                       </button>
                     </div>
                   </div>
@@ -1834,6 +1834,9 @@ export function UtilitiesWorkbench({
               {/* ===================================================== */}
               {activeUtility === "ajo" && (
                 <div className="space-y-6">
+                  <a href="/ajo" className="block rounded-2xl border border-amber-400/70 bg-amber-50 p-4 text-sm text-amber-950 hover:border-amber-500">
+                    <b>New: Ajo circles with one central pool account.</b> Everyone pays into the pool, the app tracks who has paid and unlocks the payout for whoever&apos;s turn it is. <span className="underline font-semibold">Open Ajo circles →</span>
+                  </a>
                   <div className="pb-4 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <span className="font-mono text-xs uppercase text-emerald-800 font-bold">
@@ -1956,7 +1959,7 @@ export function UtilitiesWorkbench({
                       } p-5 rounded-2xl bg-white border border-stone-200 space-y-3`}
                     >
                       <h4 className="font-semibold text-sm text-stone-700">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Tap Member to Mark Contribution Paid / Unpaid"
                           : "Touch Member Name Mark Say E Don Drop Hand"}
                       </h4>
@@ -2060,7 +2063,7 @@ export function UtilitiesWorkbench({
                       UTILITY 08 • BILL REMINDERS &amp; SAVED BENEFICIARIES
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Monthly Due Dates + Saved Meter, Cable & Airtime Numbers"
                         : "Monthly Bill Due Date + Saved Prepaid Meter & Decoder List"}
                     </h3>
@@ -2294,7 +2297,7 @@ export function UtilitiesWorkbench({
                       UTILITY 09 • USSD CODES &amp; EMERGENCY LINES
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Offline Bank USSD, Network Codes & Toll-Free Tap-to-Dial"
                         : "No-Data Bank Code, Network USSD & Free Emergency Call"}
                     </h3>
@@ -2356,10 +2359,10 @@ export function UtilitiesWorkbench({
                             {entry.provider}
                           </span>
                           <h4 className="font-bold text-sm text-stone-950 mt-1">
-                            {lang === "en" ? entry.titleEn : entry.titlePcm}
+                            {lang !== "pcm" ? entry.titleEn : entry.titlePcm}
                           </h4>
                           <p className="text-xs text-stone-500 mt-0.5">
-                            {lang === "en" ? entry.noteEn : entry.notePcm}
+                            {lang !== "pcm" ? entry.noteEn : entry.notePcm}
                           </p>
                         </div>
 
@@ -2409,7 +2412,7 @@ export function UtilitiesWorkbench({
                       UTILITY 10 • SCAM CHECK &amp; PERSONAL BLOCKLIST
                     </span>
                     <h3 className="font-display text-2xl font-bold text-stone-950">
-                      {lang === "en"
+                      {lang !== "pcm"
                         ? "Red-Flag Scam Analyzer & Local Phone Blocklist"
                         : "Shine Your Eye Scam Checker & Bad Number Blocklist"}
                     </h3>
@@ -2426,7 +2429,7 @@ export function UtilitiesWorkbench({
                       } p-5 rounded-2xl bg-white border border-stone-200 space-y-4`}
                     >
                       <h4 className="font-semibold text-sm text-stone-800">
-                        {lang === "en"
+                        {lang !== "pcm"
                           ? "Tick any red flags happening right now:"
                           : "Tick wetin the person dey try do right now:"}
                       </h4>
@@ -2454,7 +2457,7 @@ export function UtilitiesWorkbench({
                                 }
                                 className="mt-0.5 rounded text-rose-700"
                               />
-                              <span>{lang === "en" ? f.en : f.pcm}</span>
+                              <span>{lang !== "pcm" ? f.en : f.pcm}</span>
                             </label>
                           );
                         })}
@@ -2500,19 +2503,19 @@ export function UtilitiesWorkbench({
                         <div className="font-display text-xl font-bold mt-1 flex items-center gap-2">
                           <AlertOctagon className="w-5 h-5 text-amber-400" />
                           {scamEval.level === "HIGH_DANGER"
-                            ? lang === "en"
+                            ? lang !== "pcm"
                               ? "HIGH SCAM ALERT — Hang Up!"
                               : "PURE 419 FORMAT — Cut Call Sharp-Sharp!"
                             : scamEval.level === "CAUTION"
-                            ? lang === "en"
+                            ? lang !== "pcm"
                               ? "Suspicious — Verify Independently"
                               : "Shine Eye — Check Your Bank App First"
-                            : lang === "en"
+                            : lang !== "pcm"
                             ? "No Major Red Flags Selected"
                             : "No Heavy Red Flag Show Yet"}
                         </div>
                         <p className="text-xs opacity-90 mt-2 leading-relaxed">
-                          {lang === "en"
+                          {lang !== "pcm"
                             ? "Rule #1: Never trust an SMS alert — open your actual bank app or dial official USSD (*737#, *901#, *966#) to confirm ledger balance."
                             : "Rule #1: No ever follow ordinary SMS alert refund money — open your bank app or press *737# / *901# check real balance."}
                         </p>
