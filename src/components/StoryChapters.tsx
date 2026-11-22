@@ -1,5 +1,7 @@
 "use client";
 
+import { CITY_OPTIONS } from "@/lib/nigeria";
+
 import { LazyVideo } from "./site/LazyVideo";
 
 import React, { useState } from "react";
@@ -466,6 +468,17 @@ export function StoryChapters({
                       {city}
                     </button>
                   ))}
+                  <select
+                    aria-label="Other state capital"
+                    value={["Lagos", "Abuja", "Port Harcourt", "Kano"].includes(selectedCity) ? "" : selectedCity}
+                    onChange={(e) => e.target.value && setSelectedCity(e.target.value)}
+                    className="px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-700 border border-stone-200"
+                  >
+                    <option value="">All 36 states + FCT…</option>
+                    {CITY_OPTIONS.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
 
                 {showTransitForm && (
@@ -726,13 +739,16 @@ export function StoryChapters({
                         onChange={(e) => setPriceLoc(e.target.value)}
                         className="rounded-lg border border-stone-300 bg-white px-2.5 py-2 text-xs"
                       />
-                      <input
-                        type="text"
-                        placeholder="City"
+                      <select
+                        aria-label="City"
                         value={priceCity}
                         onChange={(e) => setPriceCity(e.target.value)}
                         className="rounded-lg border border-stone-300 bg-white px-2.5 py-2 text-xs"
-                      />
+                      >
+                        {CITY_OPTIONS.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
                       <input
                         type="number"
                         required
@@ -1110,11 +1126,9 @@ export function StoryChapters({
                         onChange={(e) => setNepaCity(e.target.value)}
                         className="rounded-lg bg-emerald-900 border border-emerald-700 px-2.5 py-2 text-xs text-white"
                       >
-                        <option value="Lagos">Lagos</option>
-                        <option value="Abuja">Abuja</option>
-                        <option value="Port Harcourt">Port Harcourt</option>
-                        <option value="Kano">Kano</option>
-                        <option value="Ibadan">Ibadan</option>
+                        {CITY_OPTIONS.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
                       </select>
                       <select
                         value={nepaDisco}

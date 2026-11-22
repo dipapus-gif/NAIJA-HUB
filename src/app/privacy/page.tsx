@@ -12,6 +12,7 @@ export default function PrivacyPage() {
       <ul>
         <li><strong>Account data:</strong> your name, email address and a salted, hashed password (we never store your password in readable form).</li>
         <li><strong>Community reports you submit:</strong> area, street, price, transit or power-status details. These are shown to other users without your name.</li>
+        <li><strong>Health requests you submit (sensitive):</strong> if you use the Health hub to record an appointment, antenatal or hospital-bed request, we store the patient's name, phone number, chosen hospital, preferred time and short notes you type. Health information is special-category personal data under the NDPA, so we ask for your consent first, collect only what the form needs, and use it only to give you a reference and let you track the request. We do not send these requests to hospitals, and we do not sell or share them.</li>
         <li><strong>AI co-pilot messages:</strong> the questions you type and the tool context needed to answer them.</li>
         <li><strong>Technical data:</strong> basic server logs (IP address, browser, timestamps) and a session cookie that keeps you logged in.</li>
         <li><strong>Preferences:</strong> your theme and language, stored on your device.</li>
@@ -22,6 +23,7 @@ export default function PrivacyPage() {
 
       <h2>3. How we use data</h2>
       <ul>
+        <li>To record and let you track health requests you submit.</li>
         <li>To create and secure your account and keep you signed in.</li>
         <li>To show community power, price and transit information.</li>
         <li>To answer your questions through the AI co-pilot.</li>

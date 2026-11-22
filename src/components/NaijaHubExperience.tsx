@@ -68,10 +68,10 @@ const FALLBACK_COMMUNITY = {
       category: "FUEL",
       itemName: "PMS Petrol",
       unit: "per Litre",
-      location: "NNPC Mega Station, Berger",
+      location: "NNPC retail, reported 15 Nov 2026",
       city: "Lagos",
-      priceNgn: 995,
-      previousPriceNgn: 1030,
+      priceNgn: 1289,
+      previousPriceNgn: 1350,
       reportedAt: new Date().toISOString(),
     },
   ] as CrowdPriceItem[],
@@ -101,9 +101,9 @@ const FALLBACK_COMMUNITY = {
     },
   ] as NafdacProductItem[],
   referenceRates: {
-    USD: 1595,
-    GBP: 2048,
-    EUR: 1720,
+    USD: 1363,
+    GBP: 1795,
+    EUR: 1495,
   },
 };
 
@@ -366,6 +366,9 @@ export function NaijaHubExperience() {
             <a href="#story" className="hover:text-amber-300 transition">
               {lang === "en" ? "Visual Story (5 Reels)" : "Street Video Torí"}
             </a>
+            <Link href="/health" className="hover:text-amber-300 transition">
+              {lang === "en" ? "Health & Emergency" : "Hospital & Emergency"}
+            </Link>
             <a href="#utilities" className="hover:text-amber-300 transition">
               {lang === "en" ? "10 Offline Utilities" : "All 10 Tools"}
             </a>
@@ -452,6 +455,25 @@ export function NaijaHubExperience() {
       </header>
 
       <MotionStage lang={lang} onJump={handleJumpToUtility} />
+
+      <section aria-label="Health and emergency" className="bg-emerald-950 border-y border-emerald-800">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row lg:items-center gap-4">
+          <div className="flex-1">
+            <h2 className="font-display font-bold text-xl text-white">
+              {lang === "en" ? "Health & Emergency, in all 36 states + FCT" : "Hospital & Emergency for all 36 states + FCT"}
+            </h2>
+            <p className="text-sm text-emerald-100/80 mt-1">
+              {lang === "en"
+                ? "Road-accident steps, pregnancy danger signs, hospitals near you, and appointment, antenatal and bed requests."
+                : "Accident steps, belle-woman warning signs, hospital near you, plus appointment, antenatal and bed request."}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <a href="tel:112" className="px-4 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold">Call 112</a>
+            <Link href="/health" className="px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold">{lang === "en" ? "Open Health hub" : "Open Health"}</Link>
+          </div>
+        </div>
+      </section>
 
       {/* ============================================================= */}
       {/* HERO STAGE: FULL-BLEED LAGOS MOTION VIDEO + LIVE POCKET HUB   */}
@@ -629,7 +651,7 @@ export function NaijaHubExperience() {
                         PMS PETROL WATCH
                       </span>
                       <span className="font-mono text-lg font-bold text-white tabular-nums">
-                        ₦{priceList[0]?.priceNgn ?? 995}/L
+                        ₦{priceList[0]?.priceNgn ?? 1289}/L
                       </span>
                       <span className="block text-[11px] text-emerald-300 mt-0.5 truncate">
                         {priceList[0]?.city ?? "Lagos"} pump →

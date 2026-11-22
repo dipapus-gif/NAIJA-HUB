@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
-export function PageShell({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
+export function PageShell({ children, wide = false }: { children: ReactNode; wide?: boolean | "xl" }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#061A14] text-stone-100">
       <header className="border-b border-emerald-900/80">
@@ -20,7 +20,7 @@ export function PageShell({ children, wide = false }: { children: ReactNode; wid
           </div>
         </div>
       </header>
-      <main className={`flex-1 w-full mx-auto px-4 py-12 ${wide ? "max-w-3xl" : "max-w-md"}`}>{children}</main>
+      <main className={`flex-1 w-full mx-auto px-4 py-12 ${wide === "xl" ? "max-w-5xl" : wide ? "max-w-3xl" : "max-w-md"}`}>{children}</main>
       <footer className="site-foot border-t border-emerald-900/80 py-6 text-center text-xs text-emerald-100/70">
         <Link href="/terms" className="hover:text-amber-300">Terms of Service</Link>
         <span className="mx-3">•</span>

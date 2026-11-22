@@ -92,7 +92,7 @@ export function UtilitiesWorkbench({
 
   // 2. Fuel & Energy inputs
   const [genLitresHr, setGenLitresHr] = useState("1.2");
-  const [genPumpPrice, setGenPumpPrice] = useState("995");
+  const [genPumpPrice, setGenPumpPrice] = useState("1289");
   const [genMaintHr, setGenMaintHr] = useState("120");
   const [genLoadKw, setGenLoadKw] = useState("1.8");
   const [nepaTariffKwh, setNepaTariffKwh] = useState("209.5");
@@ -271,7 +271,7 @@ export function UtilitiesWorkbench({
       calcTripFuelCost({
         distanceKm: Number(tripKm) || 0,
         litresPer100Km: Number(tripL100) || 0,
-        fuelPricePerLitreNgn: Number(genPumpPrice) || 995,
+        fuelPricePerLitreNgn: Number(genPumpPrice) || 1289,
         roundTrip: tripRound,
         passengers: Number(tripPax) || 1,
       }),

@@ -24,6 +24,9 @@ export default function TermsPage() {
       <h2>4. AI co-pilot</h2>
       <p>The co-pilot may produce inaccurate or incomplete answers. Do not rely on it for decisions involving money, health or safety. Do not put passwords, card numbers, BVN/NIN or other highly sensitive data into it. Messages you send may be processed by a third-party AI provider to generate a reply, as described in our <a href="/privacy">Privacy Policy</a>.</p>
 
+      <h2>4A. Health hub</h2>
+      <p>The Health hub gives general information and lets you record appointment, antenatal and bed requests. It is not medical advice, does not replace a clinician, and is not an emergency service. Requests are stored for your reference only and are not transmitted to or confirmed by any hospital; nothing is booked until the hospital confirms with you. In an emergency, call 112 (or FRSC 122 for a road crash) or go to the nearest Emergency Unit. Hospital names are listed for convenience and do not imply endorsement or partnership.</p>
+
       <h2>5. Community reports</h2>
       <p>When you submit a report (for example a power status, a price or a transit alert) you confirm it is honest to the best of your knowledge, and you grant us a non-exclusive licence to display it in the Service. Do not submit unlawful, misleading, abusive or personal content. We may remove content or suspend accounts that break these rules.</p>
 
