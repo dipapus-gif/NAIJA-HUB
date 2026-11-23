@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowRight, ChevronDown, Pause, Play } from "lucide-react";
 import { pick, type Lang } from "@/lib/i18n";
+import { SCENES } from "./StoryScenes";
 import { videoSources } from "@/lib/videoSources";
 
 interface Copy { title: string; body: string }
@@ -93,6 +94,7 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [small, setSmall] = useState(false);
+  const [ready, setReady] = useState<boolean[]>(() => CHAPTERS.map(() => false));
   const total = CHAPTERS.length + 1; // + finale
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const videos = useRef<(HTMLVideoElement | null)[]>([]);
@@ -142,20 +144,24 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
         <div aria-hidden className="absolute inset-0">
           {CHAPTERS.map((c, i) => {
             const near = Math.abs(i - cur) <= 1;
+            const Scene = SCENES[i];
             return (
               <div key={c.video} className="absolute inset-0 transition-opacity duration-700 ease-out" style={{ opacity: i === cur ? 1 : 0 }}>
+                {/* The illustrated scene is always there; the real video fades in over it once it can play */}
+                <Scene />
                 <video
                   ref={(el) => {
                     videos.current[i] = el;
                   }}
-                  poster={c.poster}
                   muted
                   loop
                   playsInline
                   disablePictureInPicture
                   autoPlay={i === cur && playing}
                   preload={near ? "auto" : "none"}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  onCanPlay={() => setReady((r) => (r[i] ? r : r.map((v, k) => (k === i ? true : v))))}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                  style={{ opacity: ready[i] ? 1 : 0 }}
                 >
                   {videoSources(c.video, { small }).map((src) => (
                     <source key={src} src={src} type="video/mp4" />

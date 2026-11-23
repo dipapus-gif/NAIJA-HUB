@@ -103,3 +103,24 @@ html[data-theme="light"] .site-foot a:hover { color: #065f46; }
 @keyframes nh-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .nh-float { animation: nh-float 3s ease-in-out infinite; will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .nh-float { animation: none; } }
+
+/* Story scene animations (transform/opacity only) */
+@keyframes nh-twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes nh-drive { from { transform: translateX(0); } to { transform: translateX(2000px); } }
+@keyframes nh-dash { from { opacity: 0.1; } 50% { opacity: 0.8; } to { opacity: 0.1; } }
+@keyframes nh-sunrise { from { transform: translateY(120px); } to { transform: translateY(-20px); } }
+@keyframes nh-bobk { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes nh-ringk { 0% { opacity: 0; transform: scale(0.9); } 40% { opacity: 1; } 100% { opacity: 0; transform: scale(1.12); } }
+@keyframes nh-scank { 0% { transform: translateY(0); } 100% { transform: translateY(400px); } }
+@keyframes nh-fallk { from { transform: translateY(0); } to { transform: translateY(1000px); } }
+@keyframes nh-spink { to { transform: rotate(360deg); } }
+.nh-twinkle { animation: nh-twinkle 3s ease-in-out infinite; }
+.nh-drive { animation: nh-drive 14s linear infinite; }
+.nh-dash { animation: nh-dash 2.4s ease-in-out infinite; }
+.nh-sunrise { animation: nh-sunrise 9s ease-out both; }
+.nh-bob { animation: nh-bobk 4s ease-in-out infinite; }
+.nh-ring { transform-origin: 1000px 450px; animation: nh-ringk 4s ease-out infinite; }
+.nh-scan { animation: nh-scank 3s ease-in-out infinite alternate; }
+.nh-fall { animation: nh-fallk 7s linear infinite; }
+.nh-spin { animation: nh-spink 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .nh-twinkle, .nh-drive, .nh-dash, .nh-sunrise, .nh-bob, .nh-ring, .nh-scan, .nh-fall, .nh-spin { animation: none; } }
