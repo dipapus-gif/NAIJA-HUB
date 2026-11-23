@@ -18,7 +18,10 @@ import {
   WifiOff,
   Zap,
 } from "lucide-react";
-import { COPY, LANGS, pick, type Lang } from "@/lib/i18n";
+import { COPY, pick } from "@/lib/i18n";
+import { useLang } from "@/lib/useLang";
+import { LangBar } from "./site/LangBar";
+import { SideMenu } from "./site/SideMenu";
 import {
   DEFAULT_DEVICE_STATE,
   getDeviceStorageBytes,
@@ -111,24 +114,7 @@ const FALLBACK_COMMUNITY = {
 };
 
 export function NaijaHubExperience() {
-  const [lang, setLang] = useState<Lang>("en");
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem("naija_hub_lang") as Lang | null;
-      if (saved && LANGS.some((l) => l.key === saved)) setLang(saved);
-    } catch {
-      /* storage unavailable */
-    }
-  }, []);
-  const changeLang = (l: Lang) => {
-    setLang(l);
-    try {
-      window.localStorage.setItem("naija_hub_lang", l);
-    } catch {
-      /* storage unavailable */
-    }
-    document.documentElement.lang = l === "pcm" ? "en" : l;
-  };
+  const [lang] = useLang();
   const [networkMode, setNetworkMode] = useState<
     "ONLINE" | "WEAK_3G" | "OFFLINE"
   >("ONLINE");
@@ -320,6 +306,21 @@ export function NaijaHubExperience() {
     [networkMode, fetchCommunityData]
   );
 
+  useEffect(() => {
+    const u = new URLSearchParams(window.location.search).get("u");
+    if (!u) return;
+    setActiveUtility(u as UtilityKey);
+    let tries = 0;
+    const id = window.setInterval(() => {
+      const el = document.getElementById("utilities");
+      if (el || ++tries > 20) {
+        window.clearInterval(id);
+        el?.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
+    return () => window.clearInterval(id);
+  }, []);
+
   const handleJumpToUtility = (key: string) => {
     setActiveUtility(key as UtilityKey);
     const el = document.getElementById("utilities");
@@ -351,6 +352,7 @@ export function NaijaHubExperience() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#061A14] text-stone-100">
+      <SideMenu onJumpUtility={handleJumpToUtility} />
       {/* Kinetic Scroll Progress Line */}
       <motion.div
         style={{ scaleX }}
@@ -359,6 +361,7 @@ export function NaijaHubExperience() {
 
       {/* Sticky Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#061A14]/95 border-b border-emerald-900/80">
+        <LangBar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
           {/* Brand Logo */}
           <a href="#top" className="flex items-center gap-2.5 group">
@@ -436,17 +439,7 @@ export function NaijaHubExperience() {
               )}
             </button>
 
-            {/* Language switch: English, Pidgin, Yorùbá, Hausa, Igbo */}
-            <select
-              aria-label="Language"
-              value={lang}
-              onChange={(e) => changeLang(e.target.value as Lang)}
-              className="rounded-full bg-emerald-950 border border-emerald-800 text-amber-300 text-[11px] font-bold px-2.5 py-1.5 cursor-pointer outline-none"
-            >
-              {LANGS.map((l) => (
-                <option key={l.key} value={l.key}>{l.label}</option>
-              ))}
-            </select>
+
 
             <button
               type="button"

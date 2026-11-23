@@ -2,10 +2,14 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { LangBar } from "./LangBar";
+import { SideMenu } from "./SideMenu";
 
 export function PageShell({ children, wide = false }: { children: ReactNode; wide?: boolean | "xl" }) {
   return (
     <div className="min-h-screen flex flex-col bg-[#061A14] text-stone-100">
+      <LangBar />
+      <SideMenu />
       <header className="border-b border-emerald-900/80">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
