@@ -84,6 +84,18 @@ const CHAPTERS: Chapter[] = [
     ha: { title: "Ajo mai gaskiya", body: "Gudanar da Ajo naka da zagaye, biya da bayanai a bayyane da kowa zai amince da su." },
     ig: { title: "Ajo e debere n'eziokwu", body: "Na-eme Ajo gị site na gburugburu, ịkwụ ụgwọ na ndekọ doro anya nke onye ọ bụla ga-atụkwasị obi." },
   },
+  {
+    video: "https://videos.pexels.com/video-files/30177891/12940540_1920_1080_24fps.mp4",
+    local: "/videos/ajo-gathering.mp4",
+    poster: "/images/ajo-gathering-poster.jpg",
+    utility: "ajo",
+    scene: "20:30 · THE GATHERING",
+    en: { title: "Your circle, your people", body: "Gather your esusu circle — friends, family or market neighbours — and see every round, payment and payout in one place." },
+    pcm: { title: "Your people, your ajo", body: "Gather your esusu people — friend, family or market neighbour — see every round, payment and payout for one place." },
+    yo: { title: "Àwọn èèyàn rẹ, Àjọ rẹ", body: "Kó àwọn ọ̀rẹ́, ẹbí àti aládùúgbò ọjà rẹ jọ, kí o sì rí gbogbo ìyípo, ìsanwó àti ìsanjade ní ibi kan." },
+    ha: { title: "Mutanenka, Ajo ɗinka", body: "Tara abokai, iyali ko maƙwabtan kasuwa, ka ga kowane zagaye, biyan kuɗi da fitarwa a wuri ɗaya." },
+    ig: { title: "Ndị gị, Ajo gị", body: "Kpọkọta ndị enyi, ezinụlọ ma ọ bụ ndị agbata obi ahịa gị, lee gburugburu, ịkwụ ụgwọ na ịnata ụgwọ niile n'otu ebe." },
+  },
 ];
 
 const FINALE: Record<Lang, string[]> = {
@@ -151,7 +163,7 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
         <div aria-hidden className="absolute inset-0">
           {CHAPTERS.map((c, i) => {
             const near = Math.abs(i - cur) <= 1;
-            const Scene = SCENES[i];
+            const Scene = SCENES[Math.min(i, SCENES.length - 1)];
             return (
               <div key={c.video} className="absolute inset-0 transition-opacity duration-700 ease-out" style={{ opacity: i === cur ? 1 : 0 }}>
                 {/* The illustrated scene is always there; the real video fades in over it once it can play */}
