@@ -34,7 +34,7 @@ export default function PrivacyPage() {
       <p>Our lawful bases are performance of our contract with you, our legitimate interests in running a safe service, and your consent where required. We do not sell your personal data and we do not show third-party advertising.</p>
 
       <h2>4. Service providers</h2>
-      <p>We use trusted processors to run the Service: Vercel (hosting and server logs), Neon (database) and, when enabled, an AI model provider reached through Vercel AI Gateway to generate co-pilot replies. The background videos load from Pexels (videos.pexels.com), which can see your IP address and browser type when they load. They process data only to provide their services to us. Some are located outside Nigeria; where data is transferred abroad we rely on appropriate safeguards under the NDPA.</p>
+      <p>We use trusted processors to run the Service: Vercel (hosting and server logs), Neon (database) and, when enabled, an AI model provider reached through Vercel AI Gateway to generate co-pilot replies. The background videos are served from our own site, and where a clip is loaded from Pexels (videos.pexels.com), Pexels can see your IP address and browser type when it loads. They process data only to provide their services to us. Some are located outside Nigeria; where data is transferred abroad we rely on appropriate safeguards under the NDPA.</p>
 
       <h2>5. Cookies and local storage</h2>
       <p>We use one essential, HTTP-only session cookie to keep you logged in, and local storage for theme, language and offline data. We do not use advertising cookies.</p>

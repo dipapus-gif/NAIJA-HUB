@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/site/PageShell";
+import { AjoHero } from "@/components/ajo/AjoHero";
 import { AjoCircles } from "@/components/ajo/AjoCircles";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function AjoPage() {
   return (
     <PageShell wide="xl">
+      <AjoHero />
       <AjoCircles />
     </PageShell>
   );

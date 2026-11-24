@@ -11,6 +11,8 @@ import { videoSources } from "@/lib/videoSources";
 interface Copy { title: string; body: string }
 interface Chapter {
   video: string;
+  /** Same clip, compressed to 720p and served from our own site: starts fast and plays smoothly on phones. */
+  local: string;
   poster: string;
   utility: string;
   scene: string;
@@ -24,6 +26,7 @@ interface Chapter {
 const CHAPTERS: Chapter[] = [
   {
     video: "https://videos.pexels.com/video-files/29103994/12573651_3840_2160_30fps.mp4",
+    local: "/videos/ch1.mp4",
     poster: "/images/story-dawn-commute.jpg",
     utility: "light",
     scene: "05:59 · LAGOS DAWN",
@@ -35,6 +38,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     video: "https://videos.pexels.com/video-files/27165160/12087844_3840_2160_25fps.mp4",
+    local: "/videos/ch2.mp4",
     poster: "/images/story-market-fuel.jpg",
     utility: "price",
     scene: "09:00 · THE MARKET",
@@ -46,6 +50,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     video: "https://videos.pexels.com/video-files/27706410/12209725_3840_2160_25fps.mp4",
+    local: "/videos/ch3.mp4",
     poster: "/images/story-verify-shield.jpg",
     utility: "scam",
     scene: "12:30 · THE UNKNOWN NUMBER",
@@ -57,6 +62,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     video: "https://videos.pexels.com/video-files/853772/853772-hd_1920_1080_25fps.mp4",
+    local: "/videos/ch4.mp4",
     poster: "/images/story-up-nepa.jpg",
     utility: "tax",
     scene: "16:00 · PAYDAY MATHS",
@@ -68,6 +74,7 @@ const CHAPTERS: Chapter[] = [
   },
   {
     video: "https://videos.pexels.com/video-files/28925673/12518915_3840_2160_30fps.mp4",
+    local: "/videos/ch5.mp4",
     poster: "/images/story-ajo-esusu.jpg",
     utility: "ajo",
     scene: "19:00 · THE CIRCLE MEETS",
@@ -163,7 +170,7 @@ export function MotionStage({ lang, onJump }: { lang: Lang; onJump: (utility: st
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                   style={{ opacity: ready[i] ? 1 : 0 }}
                 >
-                  {videoSources(c.video, { small }).map((src) => (
+                  {(small ? [c.local, ...videoSources(c.video, { small })] : [...videoSources(c.video, { small }), c.local]).map((src) => (
                     <source key={src} src={src} type="video/mp4" />
                   ))}
                 </video>
