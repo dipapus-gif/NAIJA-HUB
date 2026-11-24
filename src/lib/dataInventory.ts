@@ -36,5 +36,6 @@ export const PROCESSORS = [
   { name: "Vercel", role: "Hosting, server logs, optional AI Gateway", region: "Global edge network (USA)" },
   { name: "Neon", role: "Postgres database for accounts, health requests and Ajo circles", region: "Set by the project’s region" },
   { name: "AI model provider (optional)", role: "Generates co-pilot replies when switched on", region: "Depends on provider" },
+  { name: "Blockradar (payment gateway)", role: "Wallet and payment gateway; sends signed webhook notices for deposits and withdrawals", region: "Set by the provider" },
   { name: "Pexels", role: "Hosts background videos", region: "Global CDN" },
 ];
