@@ -26,6 +26,8 @@ export function PageShell({ children, wide = false }: { children: ReactNode; wid
       </header>
       <main className={`flex-1 w-full mx-auto px-4 py-12 ${wide === "xl" ? "max-w-5xl" : wide ? "max-w-3xl" : "max-w-md"}`}>{children}</main>
       <footer className="site-foot border-t border-emerald-900/80 py-6 text-center text-xs text-emerald-100/70">
+        <Link href="/real-life" className="hover:text-amber-300">Real life</Link>
+        <span className="mx-3">•</span>
         <Link href="/terms" className="hover:text-amber-300">Terms of Service</Link>
         <span className="mx-3">•</span>
         <Link href="/privacy" className="hover:text-amber-300">Privacy Policy</Link>

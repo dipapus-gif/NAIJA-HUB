@@ -134,6 +134,7 @@ export function SideMenu({ onJumpUtility }: Props) {
               {!q && (
                 <>
                   <div className={head}><HeartPulse className="w-3.5 h-3.5" />{L("HEALTH & MONEY", "HOSPITAL & MONEY", "ÌLERA ÀTI OWÓ", "LAFIYA DA KUƊI", "AHỤIKE NA EGO")}</div>
+                  <Link href="/real-life" onClick={go} className={item}>{L("Real life: every tool in use", "Real life: every tool for use", "Ayé gidi: gbogbo irinṣẹ́", "Rayuwa ta gaske: kowane kayan aiki", "Ndụ n'eziokwu: ngwa niile")}</Link>
                   <Link href="/health" onClick={go} className={item}>{L("Health & Emergency", "Hospital & Emergency", "Ìlera àti pàjáwìrì", "Lafiya da gaggawa", "Ahụike na ihe mberede")}</Link>
                   <a href="tel:112" className={`${item} text-rose-300`}>{L("Call 112 (emergency)", "Call 112 (emergency)", "Pe 112 (pàjáwìrì)", "Kira 112 (gaggawa)", "Kpọọ 112 (mberede)")}</a>
                   <Link href="/ajo" onClick={go} className={item}><Users className="inline w-4 h-4 mr-1.5 -mt-0.5" />{L("Ajo circles (central pool)", "Ajo circles (one pool)", "Àjọ (àpò àárín)", "Ajo (asusun tsakiya)", "Ajo (ọdọ ego etiti)")}</Link>
